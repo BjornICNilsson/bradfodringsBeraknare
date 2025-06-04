@@ -1,14 +1,14 @@
-# Inmatade värden
-vagg_bredd = 6.0          # meter
-vagg_hojd = 2.5           # meter
-brada_bredd = 0.16        # meter
-spalt_bredd = 0.005       # meter (5 mm spalt)
-tillgangliga_langder = [3.0, 3.6, 4.2, 4.8, 5.1, 5.4, 6.0]  # meter
-spill_marginal_procent = 10  # procent
-
-# Importera tabulate
+# Importer
 from math import ceil
 from tabulate import tabulate
+
+# Inmatade värden
+vagg_bredd = 6.0  # meter
+vagg_hojd = 2.5  # meter
+brada_bredd = 0.16  # meter
+spalt_bredd = 0.005  # meter (5 mm spalt)
+tillgangliga_langder = [3.0, 3.6, 4.2, 4.8, 5.1, 5.4, 6.0]  # meter
+spill_marginal_procent = 10  # procent
 
 # Effektiv bredd per bräda inklusive spalt
 effektiv_bredd = brada_bredd + spalt_bredd
