@@ -1,27 +1,28 @@
+# Importer
+from math import ceil
+from tabulate import tabulate
+
 # Inmatade värden
-vagg_bredd = 6.0          # meter
-vagg_hojd = 2.5           # meter
-brada_bredd = 0.16        # meter
-spalt_bredd = 0.005       # meter (5 mm spalt)
+vagg_bredd = 6.0  # meter
+vagg_hojd = 2.5  # meter
+brada_bredd = 0.16  # meter
+spalt_bredd = 0.005  # meter (5 mm spalt)
 tillgangliga_langder = [3.0, 3.6, 4.2, 4.8, 5.1, 5.4, 6.0]  # meter
 spill_marginal_procent = 10  # procent
-
-# Importera tabulate
-from tabulate import tabulate
 
 # Effektiv bredd per bräda inklusive spalt
 effektiv_bredd = brada_bredd + spalt_bredd
 
 # Räkna ut hur många brädor som behövs
 antal_brdor = vagg_bredd / effektiv_bredd
-antal_brdor = int(antal_brdor + 0.999)  # Avrunda uppåt till heltal
+antal_brdor = ceil(antal_brdor)  # Avrunda uppåt till heltal
 
 # Räkna ut total löpmeter som behövs
 total_lopmeter = antal_brdor * vagg_hojd
 
 # Skriv ut resultat utan spalt
 print("=== Utan spalt ===")
-antal_brdor_utan_spalt = int(vagg_bredd / brada_bredd + 0.999)
+antal_brdor_utan_spalt = ceil(vagg_bredd / brada_bredd)
 total_lopmeter_utan_spalt = antal_brdor_utan_spalt * vagg_hojd
 print(f"Antal brädor utan spalt: {antal_brdor_utan_spalt} st")
 print(f"Total löpmeter utan spalt: {total_lopmeter_utan_spalt:.2f} meter")
@@ -44,7 +45,7 @@ for langd in tillgangliga_langder:
         continue  # denna längd är för kort
 
     antal_langa_brdor = antal_brdor / brador_per_lang_brada
-    antal_langa_brdor = int(antal_langa_brdor + 0.999)
+    antal_langa_brdor = ceil(antal_langa_brdor)
 
     spill_per_lang_brada = langd - (brador_per_lang_brada * vagg_hojd)
     total_spill = spill_per_lang_brada * antal_langa_brdor
@@ -73,7 +74,7 @@ lopmeter_med_marginal = total_lopmeter_for_basta_langd + spill_marginal
 
 # Räkna ut antal brädor att köpa inkl. marginal
 antal_brdor_med_marginal = lopmeter_med_marginal / basta_langd
-antal_brdor_med_marginal = int(antal_brdor_med_marginal + 0.999)
+antal_brdor_med_marginal = ceil(antal_brdor_med_marginal)
 
 # Skriv ut snygg tabell
 print("\n=== Optimering - jämförelse av långa brädor ===")
